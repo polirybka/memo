@@ -1,6 +1,9 @@
 $(document).ready(function() {
 		var lol = {
 			cards: [1,1,2,2,3,3,4,4,5,5],
+			pics: ['/img/spooky.svg','/img/spooky.svg','/img/plush.svg',
+			'/img/plush.svg','/img/monstr.svg','/img/monstr.svg',
+			'/img/flower.svg','/img/flower.svg','/img/bob.svg','/img/bob.svg'],
 			unit: function() {
 				lol.suffle();
 
@@ -8,12 +11,13 @@ $(document).ready(function() {
 			suffle: function() {
 				var random=0;
 				var temp=0;
-				for (var i = 0; i < lol.cards.length; i++) {
+				for (var i = 0; i < lol.pics.length; i++) {
 					random=Math.round(Math.random() * i);
 
 					temp = lol.cards[i];
 					lol.cards[i]=lol.cards[random];
 					lol.cards[random]=temp;
+
 
 				}
 				console.log('shuffled card array '+lol.cards);
@@ -23,12 +27,18 @@ $(document).ready(function() {
 				$('.memory-card').each(function(index){
 					$(this).attr('data-card-value',lol.cards[index]);
 				});
+				lol.changeCards();
+			},
+				changeCards: function() {
+					$('.memory-card').each(function(index){
+						$('.front-face').attr('src'+lol.pics[index]);
+					});
 				lol.clickHandler();
 			},
 			clickHandler: function() {
 				$('.memory-card').on('click',function() {
 					$(this).addClass('selected');
-          $(this).toggleClass( "flip", 1000 );
+           $(this).toggleClass( "flip", 1000 );
 
 					lol.checkMatch();
 
