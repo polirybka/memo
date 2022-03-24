@@ -21,17 +21,17 @@ $(document).ready(function() {
 
 				}
 				console.log('shuffled card array '+lol.cards);
-				lol.assignCards();
-			},
-			assignCards: function() {
-				$('.memory-card').each(function(index){
-					$(this).attr('data-card-value',lol.cards[index]);
-				});
 				lol.changeCards();
 			},
+			// assignCards: function() {
+			// 	$('.memory-card').each(function(index){
+			// 		$(this).attr('data-card-value',lol.cards[index]);
+			// 	});
+			// 	lol.changeCards();
+			// },
 				changeCards: function() {
 					$('.memory-card').each(function(index){
-						$('.front-face').attr('src'+lol.pics[index]);
+						$(this).attr('data-card-value',lol.cards[index]);
 					});
 				lol.clickHandler();
 			},
@@ -50,7 +50,7 @@ $(document).ready(function() {
 					if($('.selected').first().data('cardValue') == $('.selected').last().data('cardValue')) {
 						//remove card
 						$('.selected').each(function() {
-							$(this).removeClass('unmatched').removeClass('selected');
+							$(this).removeClass('selected');
 						});
 						lol.checkWin();
 					} else {
